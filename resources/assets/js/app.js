@@ -10,6 +10,7 @@ require('datatables.net-dt');
 require('datatables.net-bs4');
 require('./scripts');
 
+
 window.Vue = require('vue');
 
 /**
