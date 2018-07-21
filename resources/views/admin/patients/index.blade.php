@@ -11,7 +11,7 @@
                 <a href="{{route('patients.create')}}" class="btn btn-success">New</a>
             </div>
             <div class="col-12">
-                <table class="table" id="tbl_test">
+                <table class="table table-striped table-bordered" id="data_table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -23,7 +23,7 @@
                     <tbody>
                     @foreach($patients as $p)
                         <tr>
-                            <th scope="row">{{$p->id}}</th>
+                            <td scope="row">{{$p->id}}</td>
                             <td>{{$p->name}}</td>
                             <td>{{$p->email}}</td>
                             <td>
