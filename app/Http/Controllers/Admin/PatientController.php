@@ -29,7 +29,8 @@ class PatientController extends Controller
     $patient = new Patient();
     $patient->create($formData);
 
-    print('Patient created successfully');
+    flash('Patient created successfully')->success();
+    return redirect(route('patients.index'));
   }
 
   public function edit(Patient $patient)
@@ -46,7 +47,8 @@ class PatientController extends Controller
     $patient = Patient::findOrFail($id);
     $patient->update($formData);
 
-    print('Patient successfully updated');
+    flash('Patient successfully updated')->success();
+    return redirect(route('patients.edit', ['id' => $id]));
   }
 
   public function delete($id)
@@ -54,6 +56,7 @@ class PatientController extends Controller
     $patient = Patient::findOrFail($id);
     $patient->delete();
 
-    print('Patient removed successfully');
+    flash('Patient removed successfully')->success();
+    return redirect(route('patients.index'));
   }
 }

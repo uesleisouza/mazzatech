@@ -24,6 +24,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{route('patients.index')}}" class="btn btn-outline-primary">Cancel</a>
                     </div>
                 </form>
             </div>

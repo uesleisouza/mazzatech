@@ -4,9 +4,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <h1>Patients</h1>
-                <table class="table">
+            </div>
+            <div class="col-6 text-right">
+                <a href="{{route('patients.create')}}" class="btn btn-success">New</a>
+            </div>
+            <div class="col-12">
+                <table class="table" id="tbl_test">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
