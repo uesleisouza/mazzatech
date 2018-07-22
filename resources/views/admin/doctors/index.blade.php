@@ -8,7 +8,7 @@
                 <h1>Doctors</h1>
             </div>
             <div class="col-6 text-right">
-                {{--<a href="{{route('doctors.create')}}" class="btn btn-success">New</a>--}}
+                <a href="{{route('doctors.create')}}" class="btn btn-success">New</a>
             </div>
             <div class="col-12">
                 <table class="table table-striped table-bordered" id="data_table">

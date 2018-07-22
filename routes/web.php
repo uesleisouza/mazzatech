@@ -19,16 +19,26 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function(){
+Route::group(['middleware' => 'auth'], function () {
 
   Route::prefix('admin')->group(function () {
 
-    // TODO: Incluir rotas em grupo
-    Route::get('patients', 'Admin\\PatientController@index')->name('patients.index');
-    Route::get('patients/create', 'Admin\\PatientController@create')->name('patients.create');
-    Route::get('patients/edit/{patient}', 'Admin\\PatientController@edit')->name('patients.edit');
-    Route::get('patients/delete/{id}', 'Admin\\PatientController@delete')->name('patients.delete');
-    Route::post('patients/store', 'Admin\\PatientController@store')->name('patients.store');
-    Route::post('patients/update/{id}', 'Admin\\PatientController@update')->name('patients.update');
+    Route::prefix('patients')->name('patients.')->group(function () {
+      Route::get('/', 'Admin\\PatientController@index')->name('index');
+      Route::get('create', 'Admin\\PatientController@create')->name('create');
+      Route::get('edit/{patient}', 'Admin\\PatientController@edit')->name('edit');
+      Route::get('delete/{id}', 'Admin\\PatientController@delete')->name('delete');
+      Route::post('store', 'Admin\\PatientController@store')->name('store');
+      Route::post('update/{id}', 'Admin\\PatientController@update')->name('update');
+    });
+
+    Route::prefix('doctors')->name('doctors.')->group(function () {
+      Route::get('/', 'Admin\\DoctorController@index')->name('index');
+      Route::get('/create', 'Admin\\DoctorController@create')->name('create');
+      Route::get('/edit/{doctor}', 'Admin\\DoctorController@edit')->name('edit');
+      Route::get('/delete/{id}', 'Admin\\DoctorController@delete')->name('delete');
+      Route::post('/store', 'Admin\\DoctorController@store')->name('store');
+      Route::post('/update/{id}', 'Admin\\DoctorController@update')->name('update');
+    });
   });
 });
