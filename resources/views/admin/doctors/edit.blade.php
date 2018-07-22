@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label>CRM:</label>
-                        <input type="email" name="crm" class="form-control @if($errors->has('crm')) is-invalid @endif" placeholder="" value="{{$doctor->crm}}">
+                        <input type="text" name="crm" class="form-control @if($errors->has('crm')) is-invalid @endif" placeholder="" value="{{$doctor->crm}}">
                         @if($errors->has('crm'))
                             <span class="invalid-feedback">{{$errors->first('crm')}}</span>
                         @endif

@@ -33,7 +33,7 @@ class DoctorController extends Controller
     return redirect(route('doctors.index'));
   }
 
-  public function edit(Doctor $patient)
+  public function edit(Doctor $doctor)
   {
     return view('admin.doctors.edit', compact('doctor'));
   }
