@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\RestauranteRequest;
+use App\Http\Requests\PatientRequest;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,7 +20,7 @@ class PatientController extends Controller
     return view('admin.patients.create');
   }
 
-  public function store(RestauranteRequest $request)
+  public function store(PatientRequest $request)
   {
     $formData = $request->all();
 
@@ -38,7 +38,7 @@ class PatientController extends Controller
     return view('admin.patients.edit', compact('patient'));
   }
 
-  public function update(RestauranteRequest $request, $id)
+  public function update(PatientRequest $request, $id)
   {
     $formData = $request->all();
 
