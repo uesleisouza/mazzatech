@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DoctorRequest;
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class DoctorController extends Controller
 {
@@ -26,8 +27,8 @@ class DoctorController extends Controller
 
     $request->validated();
 
-    $patient = new Doctor();
-    $patient->create($formData);
+    $doctor = new Doctor();
+    $doctor->create($formData);
 
     flash('Doctor created successfully')->success();
     return redirect(route('doctors.index'));
@@ -44,8 +45,8 @@ class DoctorController extends Controller
 
     $request->validated();
 
-    $patient = Doctor::findOrFail($id);
-    $patient->update($formData);
+    $doctor = Doctor::findOrFail($id);
+    $doctor->update($formData);
 
     flash('Doctor successfully updated')->success();
     return redirect(route('doctors.edit', ['id' => $id]));
@@ -53,10 +54,15 @@ class DoctorController extends Controller
 
   public function delete($id)
   {
-    $patient = Doctor::findOrFail($id);
-    $patient->delete();
+    $doctor = Doctor::findOrFail($id);
 
-    flash('Doctor removed successfully')->success();
+    try {
+      $doctor->delete();
+      flash('Doctor removed successfully')->success();
+    } catch (Exception $e) {
+      flash('Record can not be deleted because it has related records')->error();
+    }
+
     return redirect(route('doctors.index'));
   }
 }
