@@ -40,5 +40,19 @@ Route::group(['middleware' => 'auth'], function () {
       Route::post('/store', 'Admin\\DoctorController@store')->name('store');
       Route::post('/update/{id}', 'Admin\\DoctorController@update')->name('update');
     });
+
+    Route::prefix('schedules')->name('schedules.')->group(function () {
+      Route::get('/', 'Admin\\ScheduleController@index')->name('index');
+      Route::get('/create', 'Admin\\ScheduleController@create')->name('create');
+      Route::get('/edit/{schedule}', 'Admin\\ScheduleController@edit')->name('edit');
+      Route::get('/delete/{id}', 'Admin\\ScheduleController@delete')->name('delete');
+      Route::post('/store', 'Admin\\ScheduleController@store')->name('store');
+      Route::post('/update/{id}', 'Admin\\ScheduleController@update')->name('update');
+    });
   });
+});
+
+Route::get('rel', function () {
+  $patient = \App\Patient::find(2);
+  dd($patient->schedules->first()->name);
 });

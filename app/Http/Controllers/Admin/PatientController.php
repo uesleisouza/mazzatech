@@ -6,6 +6,7 @@ use App\Http\Requests\PatientRequest;
 use App\Patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class PatientController extends Controller
 {
@@ -54,9 +55,14 @@ class PatientController extends Controller
   public function delete($id)
   {
     $patient = Patient::findOrFail($id);
-    $patient->delete();
 
-    flash('Patient removed successfully')->success();
+    try {
+      $patient->delete();
+      flash('Patient removed successfully')->success();
+    } catch (Exception $e) {
+      flash('Record can not be deleted because it has related records')->error();
+    }
+
     return redirect(route('patients.index'));
   }
 }
