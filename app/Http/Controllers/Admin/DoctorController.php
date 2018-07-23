@@ -10,6 +10,14 @@ use Exception;
 
 class DoctorController extends Controller
 {
+
+  public function api_index()
+  {
+    $doctors = Doctor::all();
+    return $doctors;
+  }
+
+
   public function index()
   {
     $doctors = Doctor::all();
