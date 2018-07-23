@@ -10,11 +10,19 @@
                 <form action="{{route('schedules.store')}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label>Name:</label>
+                        <label>Title:</label>
                         <input type="text" name="name" class="form-control @if($errors->has('name')) is-invalid @endif"
                                value="{{old('name')}}">
                         @if($errors->has('name'))
                             <span class="invalid-feedback">{{$errors->first('name')}}</span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Date / Time:</label>
+                        <input type="datetime-local" name="date_time" class="form-control @if($errors->has('date_time')) is-invalid @endif"
+                               value="{{old('date_time')}}">
+                        @if($errors->has('date_time'))
+                            <span class="invalid-feedback">{{$errors->first('date_time')}}</span>
                         @endif
                     </div>
                     <div class="form-group">

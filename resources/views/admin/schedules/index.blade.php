@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{--    {{dd($patients)}}--}}
-
     <div class="container">
         <div class="row">
             <div class="col-6">
@@ -20,6 +18,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Patient</th>
                         <th scope="col">Doctor</th>
+                        <th scope="col">Date/Time</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -30,6 +29,7 @@
                             <td>{{$s->name}}</td>
                             <td>{{$patients->find($s->patient_id)->name}}</td>
                             <td>{{$doctors->find($s->doctor_id)->name}}</td>
+                            <td>{{$s->date_time}}</td>
                             <td>
                                 <a href="{{route('schedules.edit', ['id' => $s->id])}}" class="btn btn-primary btn-sm">Edit</a>
                                 <a href="{{route('schedules.delete', ['id' => $s->id])}}" class="btn btn-danger btn-sm">Remove</a>
