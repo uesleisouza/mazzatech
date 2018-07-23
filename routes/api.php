@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,22 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::prefix('doctors')->group(function () {
+
+  Route::get('/', function () {
+    return \App\Doctor::all();
+  });
+
+  Route::get('/{id}', function ($id) {
+    try {
+      return \App\Doctor::findOrFail($id);
+    } catch (Exception $e) {
+      return response()->json([
+        'Error' => 'Register not found'
+      ]);
+    }
+  });
 });
