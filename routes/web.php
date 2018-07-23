@@ -21,38 +21,46 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-  Route::prefix('admin')->group(function () {
+  Route::prefix('admin')->namespace('Admin')->group(function () {
 
     Route::prefix('patients')->name('patients.')->group(function () {
-      Route::get('/', 'Admin\\PatientController@index')->name('index');
-      Route::get('create', 'Admin\\PatientController@create')->name('create');
-      Route::get('edit/{patient}', 'Admin\\PatientController@edit')->name('edit');
-      Route::get('delete/{id}', 'Admin\\PatientController@delete')->name('delete');
-      Route::post('store', 'Admin\\PatientController@store')->name('store');
-      Route::post('update/{id}', 'Admin\\PatientController@update')->name('update');
+      Route::get('/', 'PatientController@index')->name('index');
+      Route::get('create', 'PatientController@create')->name('create');
+      Route::get('edit/{patient}', 'PatientController@edit')->name('edit');
+      Route::get('delete/{id}', 'PatientController@delete')->name('delete');
+      Route::post('store', 'PatientController@store')->name('store');
+      Route::post('update/{id}', 'PatientController@update')->name('update');
     });
 
     Route::prefix('doctors')->name('doctors.')->group(function () {
-      Route::get('/', 'Admin\\DoctorController@index')->name('index');
-      Route::get('/create', 'Admin\\DoctorController@create')->name('create');
-      Route::get('/edit/{doctor}', 'Admin\\DoctorController@edit')->name('edit');
-      Route::get('/delete/{id}', 'Admin\\DoctorController@delete')->name('delete');
-      Route::post('/store', 'Admin\\DoctorController@store')->name('store');
-      Route::post('/update/{id}', 'Admin\\DoctorController@update')->name('update');
+      Route::get('/', 'DoctorController@index')->name('index');
+      Route::get('/create', 'DoctorController@create')->name('create');
+      Route::get('/edit/{doctor}', 'DoctorController@edit')->name('edit');
+      Route::get('/delete/{id}', 'DoctorController@delete')->name('delete');
+      Route::post('/store', 'DoctorController@store')->name('store');
+      Route::post('/update/{id}', 'DoctorController@update')->name('update');
     });
 
     Route::prefix('schedules')->name('schedules.')->group(function () {
-      Route::get('/', 'Admin\\ScheduleController@index')->name('index');
-      Route::get('/create', 'Admin\\ScheduleController@create')->name('create');
-      Route::get('/edit/{schedule}', 'Admin\\ScheduleController@edit')->name('edit');
-      Route::get('/delete/{id}', 'Admin\\ScheduleController@delete')->name('delete');
-      Route::post('/store', 'Admin\\ScheduleController@store')->name('store');
-      Route::post('/update/{id}', 'Admin\\ScheduleController@update')->name('update');
+      Route::get('/', 'ScheduleController@index')->name('index');
+      Route::get('/create', 'ScheduleController@create')->name('create');
+      Route::get('/edit/{schedule}', 'ScheduleController@edit')->name('edit');
+      Route::get('/delete/{id}', 'ScheduleController@delete')->name('delete');
+      Route::post('/store', 'ScheduleController@store')->name('store');
+      Route::post('/update/{id}', 'ScheduleController@update')->name('update');
+    });
+
+    Route::prefix('users')->name('users.')->group(function () {
+      Route::get('/', 'UserController@index')->name('index');
+      Route::get('/create', 'UserController@create')->name('create');
+      Route::get('/edit/{user}', 'UserController@edit')->name('edit');
+      Route::get('/delete/{id}', 'UserController@delete')->name('delete');
+      Route::post('/store', 'UserController@store')->name('store');
+      Route::post('/update/{id}', 'UserController@update')->name('update');
+
+
+      Route::patch('/{user}',  ['as' => 'users.update', 'uses' => 'UserController@update']);
+
     });
   });
-});
-
-Route::get('rel', function () {
-  $patient = \App\Patient::find(2);
-  dd($patient->schedules->first()->name);
 });
